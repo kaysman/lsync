@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Translations</title></head>
+<body>
+<h1>Translation Viewer</h1>
+<pre id="out">Loading...</pre>
+<script>
+fetch('/api/translations')
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('out').textContent = JSON.stringify(d, null, 2);
+  });
+</script>
+</body>
+</html>
