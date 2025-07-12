@@ -26,8 +26,8 @@ impl GoogleSheetApiClient {
         let client_secret = get_client_secret();
 
         let client_secret = yup_oauth2::ApplicationSecret {
-            client_id: CLIENT_ID.to_string(),
-            client_secret: CLIENT_SECRET.to_string(),
+            client_id: client_id.to_string(),
+            client_secret: client_secret.to_string(),
             auth_uri: AUTH_URI.to_string(),
             token_uri: TOKEN_URI.to_string(),
             redirect_uris: vec![REDIRECT_URI_1.to_string()],
