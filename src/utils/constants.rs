@@ -1,3 +1,4 @@
+pub const APPNAME: &str = "lsync";
 pub const DESCRIPTION: &str =
     "A CLI tool for syncing translations from Google Sheets into your Flutter app.";
 

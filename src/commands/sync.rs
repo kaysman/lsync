@@ -1,6 +1,7 @@
 use crate::google_sheet_api_client::GoogleSheetApiClient;
 use crate::models::config::Config;
 use crate::sheets4::api::ValueRange;
+use crate::utils::constants::APPNAME;
 use crate::utils::dart_generator::run_flutter_generator;
 use crate::utils::logging::*;
 use crate::utils::required_files::{config_exists, open_config_file};
@@ -11,7 +12,10 @@ pub struct Sync {}
 impl Sync {
     pub async fn run() {
         if !config_exists() {
-            log_error("Project has not been initialized: run `lsync setup`");
+            log_error(&format!(
+                "Project has not been initialized: run `{} setup`",
+                APPNAME
+            ));
             std::process::exit(1);
         }
 

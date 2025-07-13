@@ -29,7 +29,7 @@ pub fn run_flutter_generator() {
 
     match gen_status {
         Ok(s) if s.success() => {
-            log_success("Translations are generated. Use `Translations.of(context).<key>` anywhere in widget tree.")
+            log_success("Done! Use the generated Lsync class in your Flutter app.")
         }
         Ok(s) => log_error(&format!("Dart generator exited with code: {}", s)),
         Err(e) => log_error(&format!("Failed to run generator: {}", e)),
@@ -48,7 +48,7 @@ fn add_flutter_intl_to_pubspec(pubspec_path: &str) {
     let append = r#"
 flutter_intl:
   enabled: true
-  class_name: "Translations"
+  class_name: "Lsync"
   arb_dir: lib/l10n
 "#;
 

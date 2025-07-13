@@ -23,7 +23,7 @@ A blazing-fast CLI tool to sync translations from Google Sheets and generate `.a
   - [Quick Navigation](#quick-navigation)
   - [Installation](#installation)
     - [🍺 Homebrew Tap for `lsync`](#-homebrew-tap-for-lsync)
-    - [Manual Install](#manual-install)
+    - [Manual Installation](#manual-installation)
   - [Setup](#setup)
   - [Usage](#usage)
   - [FAQ](#faq)
@@ -42,7 +42,7 @@ brew tap kaysman/lsync
 brew install lsync
 ```
 
-### Manual Install
+### Manual Installation
 
 ```bash
 cargo install lsync
@@ -75,6 +75,35 @@ lsync sync
 - Fetches latest translations from your configured sheet.
 - Generates `.arb` files in `lib/l10n/`.
 - Runs Dart generator.
+- Creates a `Lsync` localization class.
+
+How to use the generated Lsync class in your Flutter app?
+
+1. Import and use Lsync class in root of your app:
+
+```
+return MaterialApp(
+  localizationsDelegates: [
+    Lsync.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ],
+  supportedLocales: Lsync.delegate.supportedLocales,
+  // ...
+);
+
+```
+
+2. Use in any widget:
+
+```
+Text(
+  Lsync.of(context).push_count_text
+),
+```
+
+Replace "push_count_text" with your actual translation key from the sheet.
 
 ## FAQ
 

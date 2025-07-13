@@ -1,4 +1,5 @@
 use crate::models::config::Config;
+use crate::utils::constants::*;
 use crate::utils::logging::*;
 use serde_json;
 use std::io::Write;
@@ -6,7 +7,7 @@ use std::path::PathBuf;
 
 // base
 pub fn localyze_dir() -> PathBuf {
-    PathBuf::from(".localyze")
+    PathBuf::from(format!(".{}", APPNAME))
 }
 
 pub fn ensure_localyze_dir_exists() -> std::io::Result<()> {
@@ -53,7 +54,7 @@ pub fn open_config_file() -> Config {
 // .gitignore
 pub fn ensure_gitignore_has_credentials_path() -> std::io::Result<()> {
     let path = ".gitignore";
-    let entry = ".localyze/credentials.json";
+    let entry = format!(".{}/credentials.json", APPNAME);
 
     let needs_write = match std::fs::read_to_string(path) {
         Ok(contents) => !contents.lines().any(|l| l.trim() == entry),

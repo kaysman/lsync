@@ -1,5 +1,5 @@
+use crate::env::{CLIENT_ID, CLIENT_SECRET};
 use crate::utils::constants::*;
-use crate::utils::env::*;
 use crate::utils::logging::*;
 use http_body_util::combinators::BoxBody;
 use hyper::body::Bytes;
@@ -22,12 +22,9 @@ impl GoogleSheetApiClient {
         let provider: CryptoProvider = default_provider();
         provider.install_default().unwrap();
 
-        let client_id = get_client_id();
-        let client_secret = get_client_secret();
-
         let client_secret = yup_oauth2::ApplicationSecret {
-            client_id: client_id.to_string(),
-            client_secret: client_secret.to_string(),
+            client_id: CLIENT_ID.to_string(),
+            client_secret: CLIENT_SECRET.to_string(),
             auth_uri: AUTH_URI.to_string(),
             token_uri: TOKEN_URI.to_string(),
             redirect_uris: vec![REDIRECT_URI_1.to_string()],
@@ -40,7 +37,7 @@ impl GoogleSheetApiClient {
             client_secret,
             yup_oauth2::InstalledFlowReturnMethod::HTTPRedirect,
         )
-        .persist_tokens_to_disk(".localyze/credentials.json")
+        .persist_tokens_to_disk(format!(".{}/credentials.json", APPNAME))
         .build()
         .await
         .unwrap_or_else(|e| {

@@ -1,5 +1,6 @@
 use crate::google_sheet_api_client::GoogleSheetApiClient;
 use crate::models::config::Config;
+use crate::utils::constants::*;
 use crate::utils::logging::*;
 use crate::utils::prompt::{
     prompt_ask_ending_column, prompt_ask_sheet_id, prompt_ask_starting_cell, prompt_yes_no,
@@ -15,7 +16,7 @@ pub struct Setup {}
 impl Setup {
     pub async fn run() {
         if let Err(e) = ensure_localyze_dir_exists() {
-            log_error(&format!("Failed to create .localyze directory: {}", e));
+            log_error(&format!("Failed to create .{} directory: {}", APPNAME, e));
             std::process::exit(1);
         }
 

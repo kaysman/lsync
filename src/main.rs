@@ -1,16 +1,16 @@
 mod commands;
+mod env;
 mod google_sheet_api_client;
 mod models;
 mod utils;
 
 extern crate google_sheets4 as sheets4;
 
-use crate::utils::constants::DESCRIPTION;
-use crate::utils::env::*;
+use crate::utils::constants::{APPNAME, DESCRIPTION};
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
-#[command(name = "lsync", version, about = DESCRIPTION)]
+#[command(name = APPNAME, version, about = DESCRIPTION)]
 #[command(arg_required_else_help = true)]
 struct Cli {
     #[command(subcommand)]
@@ -27,7 +27,7 @@ enum Commands {
 
 #[tokio::main]
 async fn main() {
-    load_env();
+    dotenvy::dotenv().ok();
 
     let cli = Cli::parse();
 
