@@ -5,11 +5,12 @@ mod utils;
 
 extern crate google_sheets4 as sheets4;
 
+use crate::utils::constants::DESCRIPTION;
 use crate::utils::env::*;
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
-#[command(name = "localyze", about = "A CLI tool for managing translations.")]
+#[command(name = "lsync", version, about = DESCRIPTION)]
 #[command(arg_required_else_help = true)]
 struct Cli {
     #[command(subcommand)]

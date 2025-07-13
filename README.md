@@ -22,6 +22,8 @@ A blazing-fast CLI tool to sync translations from Google Sheets and generate `.a
   - [Overview](#overview)
   - [Quick Navigation](#quick-navigation)
   - [Installation](#installation)
+    - [🍺 Homebrew Tap for `lsync`](#-homebrew-tap-for-lsync)
+    - [Manual Install](#manual-install)
   - [Setup](#setup)
   - [Usage](#usage)
   - [FAQ](#faq)
@@ -30,6 +32,17 @@ A blazing-fast CLI tool to sync translations from Google Sheets and generate `.a
 ---
 
 ## Installation
+
+### 🍺 Homebrew Tap for `lsync`
+
+Install via Homebrew:
+
+```bash
+brew tap kaysman/lsync
+brew install lsync
+```
+
+### Manual Install
 
 ```bash
 cargo install lsync

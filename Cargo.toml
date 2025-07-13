@@ -1,7 +1,12 @@
 [package]
-name = "localyze_sync_cli"
-version = "0.1.0"
+name = "lsync"
+version = "0.1.1"
 edition = "2021"
+
+[profile.release]
+opt-level = "z"     
+lto = true           
+codegen-units = 1
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }
