@@ -41,7 +41,7 @@ impl GoogleSheetApiClient {
         .build()
         .await
         .unwrap_or_else(|e| {
-            log_error(&format!("OAuth failed: {}", e));
+            log_error(&format!("Google OAuth failed: {}", e));
             std::process::exit(1);
         });
 
