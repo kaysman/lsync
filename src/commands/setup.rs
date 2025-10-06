@@ -3,7 +3,8 @@ use crate::models::config::Config;
 use crate::utils::constants::*;
 use crate::utils::logging::*;
 use crate::utils::prompt::{
-    prompt_ask_ending_column, prompt_ask_sheet_id, prompt_ask_starting_cell, prompt_yes_no,
+    prompt_ask_ending_column, prompt_ask_sheet_id, prompt_ask_starting_cell, prompt_ask_target,
+    prompt_yes_no,
 };
 use crate::utils::required_files as files;
 use files::{
@@ -71,10 +72,13 @@ impl Setup {
             std::process::exit(1);
         }
 
+        let target = prompt_ask_target();
+
         let config = Config {
             sheet_id: sheet_id.clone(),
             start_cell,
             end_column,
+            target,
         };
 
         match serde_json::to_string_pretty(&config) {

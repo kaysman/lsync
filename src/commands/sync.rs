@@ -1,11 +1,12 @@
 use crate::google_sheet_api_client::GoogleSheetApiClient;
-use crate::models::config::Config;
+use crate::models::config::{Config, Target};
 use crate::sheets4::api::ValueRange;
 use crate::utils::constants::APPNAME;
 use crate::utils::dart_generator::run_flutter_generator;
 use crate::utils::logging::*;
 use crate::utils::required_files::{config_exists, open_config_file};
 use crate::utils::write_arb_files::*;
+use crate::utils::write_json_files::write_json_files;
 
 pub struct Sync {}
 
@@ -38,8 +39,9 @@ impl Sync {
                 log_error(&format!("Failed to fetch sheet: {}", e));
             }
         }
-
-        run_flutter_generator();
+        if config.target == Target::Flutter {
+            run_flutter_generator();
+        }
     }
 }
 
@@ -59,7 +61,10 @@ fn process_sheets(value_range: ValueRange, config: &Config) {
             let header = &rows[start_row_index];
             let translations = &rows[start_row_index + 1..];
 
-            write_arb_files(header, translations);
+            match config.target {
+                Target::Flutter => write_arb_files(header, translations),
+                Target::React => write_json_files(header, translations),
+            }
         }
         Some(_) | None => {
             log_error("Sheet is empty or malformed.");

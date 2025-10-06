@@ -1,6 +1,6 @@
 [package]
 name = "lsync"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["Atabek Kadirov <atabek.iuhd@gmail.com>"]
 license = "MIT"
